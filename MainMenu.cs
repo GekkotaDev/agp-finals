@@ -20,10 +20,10 @@ class MainMenu
                 Environment.Exit(0);
             });
 
-        Raylib.InitWindow(800, 600, "BlobSlop Launcher");
+        Raylib.InitWindow(800, 600, "Blob Brawl");
         Raylib.SetTargetFPS(60);
 
-     while (!Raylib.WindowShouldClose() && stateMachine.State != "Exiting")
+        while (!Raylib.WindowShouldClose() && stateMachine.State != "Exiting")
         {
             float screenWidth = Raylib.GetScreenWidth();
             float screenHeight = Raylib.GetScreenHeight();
@@ -56,13 +56,13 @@ class MainMenu
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.Black);
 
-        
+
             Color playColor = isMouseOverPlay ? Color.DarkBlue : Color.Blue;
             Raylib.DrawRectangleRec(playButton, playColor);
             Raylib.DrawRectangleLinesEx(playButton, 2, Color.White);
             Raylib.DrawText("PLAY", (int)playButton.X + 75, (int)playButton.Y + 15, 20, Color.White);
 
-          
+
             Color quitColor = isMouseOverQuit ? Color.Maroon : Color.Red;
             Raylib.DrawRectangleRec(quitButton, quitColor);
             Raylib.DrawRectangleLinesEx(quitButton, 2, Color.White);
