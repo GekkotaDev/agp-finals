@@ -2,7 +2,7 @@ using System.Numerics;
 using Raylib_cs;
 using rlImGui_cs;
 
-class GameProgram {
+public class GameProgram {
     public static void Main() {
         const int screenWidth = 800;
         const int screenHeight = 600;

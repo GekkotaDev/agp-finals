@@ -2,10 +2,8 @@ using System.Numerics;
 using Raylib_cs;
 using Stateless;
 
-class MainMenu
-{
-    static void Main(string[] args)
-    {
+class MainMenu {
+    public static void Main(string[] args) {
         var stateMachine = new StateMachine<string, string>("Menu");
 
         stateMachine.Configure("Menu")
@@ -13,8 +11,7 @@ class MainMenu
             .Permit("ClickQuit", "Exiting");
 
         stateMachine.Configure("Launching")
-            .OnEntry(() =>
-            {
+            .OnEntry(() => {
                 Raylib.CloseWindow();
                 GameProgram.Main();
                 Environment.Exit(0);
@@ -23,8 +20,7 @@ class MainMenu
         Raylib.InitWindow(800, 600, "Blob Brawl");
         Raylib.SetTargetFPS(60);
 
-        while (!Raylib.WindowShouldClose() && stateMachine.State != "Exiting")
-        {
+        while (!Raylib.WindowShouldClose() && stateMachine.State != "Exiting") {
             float screenWidth = Raylib.GetScreenWidth();
             float screenHeight = Raylib.GetScreenHeight();
             float buttonWidth = 200f;
@@ -41,14 +37,10 @@ class MainMenu
             bool isMouseOverPlay = Raylib.CheckCollisionPointRec(mousePosition, playButton);
             bool isMouseOverQuit = Raylib.CheckCollisionPointRec(mousePosition, quitButton);
 
-            if (stateMachine.State == "Menu")
-            {
-                if (isMouseOverPlay && Raylib.IsMouseButtonPressed(MouseButton.Left))
-                {
+            if (stateMachine.State == "Menu") {
+                if (isMouseOverPlay && Raylib.IsMouseButtonPressed(MouseButton.Left)) {
                     stateMachine.Fire("ClickPlay");
-                }
-                else if (isMouseOverQuit && Raylib.IsMouseButtonPressed(MouseButton.Left))
-                {
+                } else if (isMouseOverQuit && Raylib.IsMouseButtonPressed(MouseButton.Left)) {
                     stateMachine.Fire("ClickQuit");
                 }
             }
