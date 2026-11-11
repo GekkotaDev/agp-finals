@@ -7,7 +7,7 @@ public class GameProgram {
         const int screenWidth = 800;
         const int screenHeight = 600;
 
-        Raylib.InitWindow(screenWidth, screenHeight, "Auto Battlerslop");
+        Raylib.InitWindow(screenWidth, screenHeight, "Blob Brawl");
         Raylib.SetTargetFPS(60);
 
         float radius = 20;

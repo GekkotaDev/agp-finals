@@ -13,7 +13,14 @@
 //*
 //* - [ ] Rename managers to something that actually tells what a class does.
 //*       https://blog.codinghorror.com/i-shall-call-it-somethingmanager/
+using Raylib_cs;
 
 public class SelectMenu {
-    public static void Main(string[] arguments) { }
+    public static void Main(string[] arguments) {
+        const int screenWidth = 800;
+        const int screenHeight = 600;
+
+        Raylib.InitWindow(screenWidth, screenHeight, "Blob Brawl");
+        Raylib.SetTargetFPS(60);
+    }
 }

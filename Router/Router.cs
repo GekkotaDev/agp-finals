@@ -6,8 +6,8 @@ using Stateless;
 public class Router {
     static Router? Instance;
 
-    public Routes route;
-    public StateMachine<Routes, Trigger> state {
+    public Routes Route;
+    public StateMachine<Routes, Trigger> Machine {
         get;
         set {
             if (field != null) return;
@@ -16,44 +16,42 @@ public class Router {
     }
 
     private Router() {
-        route = Routes.MainMenu;
-        state = new(Routes.MainMenu);
+        Route = Routes.MainMenu;
+        Machine = new(Routes.MainMenu);
 
         // The provided callback function will be called whenever the state has
         // been changed (the transition from state A to state B).
-        state.OnTransitioned(transition => { });
+        Machine.OnTransitioned(transition => { });
 
         // Run when the transition is completed.
-        state.OnTransitionCompleted(transition => {
+        Machine.OnTransitionCompleted(transition => {
+            Route = transition.Destination;
+            Raylib.CloseWindow();
+
             switch (transition.Destination) {
                 case Routes.MainMenu:
-                    Raylib.CloseWindow();
                     MainMenu.Main([]);
-                    Environment.Exit(0);
                     break;
 
                 case Routes.SelectMenu:
-                    Raylib.CloseWindow();
                     SelectMenu.Main([]);
-                    Environment.Exit(0);
                     break;
 
                 case Routes.Game:
-                    Raylib.CloseWindow();
                     GameProgram.Main();
-                    Environment.Exit(0);
                     break;
             }
+
+            Environment.Exit(0);
         });
 
-        //! CONFIGURE FOR EVERY STATE.
-        state.Configure(Routes.MainMenu)
+        Machine.Configure(Routes.MainMenu)
             .Permit(Trigger.SelectBlobs, Routes.SelectMenu);
 
-        state.Configure(Routes.SelectMenu)
+        Machine.Configure(Routes.SelectMenu)
             .Permit(Trigger.StartGame, Routes.Game);
 
-        state.Configure(Routes.Game)
+        Machine.Configure(Routes.Game)
             .Permit(Trigger.ReturnToMenu, Routes.MainMenu);
     }
 
