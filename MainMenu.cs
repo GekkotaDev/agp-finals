@@ -99,12 +99,12 @@ class MainMenu {
             bool isMouseOverPlay = Raylib.CheckCollisionPointRec(mousePosition, playButton);
             bool isMouseOverQuit = Raylib.CheckCollisionPointRec(mousePosition, quitButton);
 
-            if (router.Route == ) {
-                if (isMouseOverPlay && Raylib.IsMouseButtonPressed(MouseButton.Left)) {
-                    router.Machine.Fire("ClickPlay");
-                } else if (isMouseOverQuit && Raylib.IsMouseButtonPressed(MouseButton.Left)) {
-                    router.Machine.Fire("ClickQuit");
-                }
+            if (router.Route == Router.Routes.MainMenu) {
+                // if (isMouseOverPlay && Raylib.IsMouseButtonPressed(MouseButton.Left)) {
+                //     router.Machine.Fire("ClickPlay");
+                // } else if (isMouseOverQuit && Raylib.IsMouseButtonPressed(MouseButton.Left)) {
+                //     router.Machine.Fire("ClickQuit");
+                // }
             }
 
             Raylib.BeginDrawing();
