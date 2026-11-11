@@ -88,8 +88,6 @@ class MainMenu {
             //!
             //! I'm doing that later. I don't have the mental bandwidth
             //! to deal with this bs right now.
-            //! 
-            //! https://youtu.be/hUxoiHfAFBo?t=112
             //! vvvvvvvvvvvvvvvv
             Rectangle playButton = new Rectangle((screenWidth - buttonWidth) / 2f, startY, buttonWidth, buttonHeight);
             Rectangle quitButton = new Rectangle((screenWidth - buttonWidth) / 2f, startY + buttonHeight + spacing, buttonWidth, buttonHeight);
@@ -111,9 +109,15 @@ class MainMenu {
             Raylib.ClearBackground(Color.Black);
             rlImGui.Begin();
 
-            //! For someone who uses Gemini, you sure can't even put it to good
-            //! use. I've queried the Gemini large language model to have a
-            //! functioning rlImGui
+            //! You use Gemini right? Here's something the "never will be
+            //! sentient" Large LANGUAGE MODEL that is Gemini returned all by
+            //! just querying
+            //!
+            //! "rlImGui-cs without window"
+            //!
+            //! And quit treating it like a damn person, those tech CEOs and
+            //! Thiel types keep saying that just so you could give them
+            //! attention and money.
 
             // Create a full-screen ImGui window with no chrome
             ImGui.SetNextWindowPos(Vector2.Zero);
@@ -123,10 +127,12 @@ class MainMenu {
                                      ImGuiWindowFlags.NoMove |
                                      ImGuiWindowFlags.NoBackground;
 
-            ImGui.Begin("HiddenRoot", flags);
+            ImGui.Begin("Root", flags);
+
+            //! Isn't this much more precise and shorter?
 
             // Put your ImGui widgets here
-            if (ImGui.Button("Test")) {
+            if (ImGui.Button("Debug")) {
                 Console.WriteLine("I'm clicked!"); ;
             }
 
