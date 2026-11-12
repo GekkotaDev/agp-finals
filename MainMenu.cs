@@ -45,6 +45,7 @@ class MainMenu {
 
         //! p.s: don't uncomment this.
         var router = Router.Router.Get();
+        
 
         // stateMachine.Configure("Menu")
         //     .Permit("ClickPlay", "Launching")
@@ -61,19 +62,7 @@ class MainMenu {
         Raylib.SetTargetFPS(60);
         rlImGui.Setup(true);
 
-        ImGuiWindowFlags imGuiFlags = ImGuiWindowFlags.NoTitleBar |
-                             ImGuiWindowFlags.NoResize |
-                             ImGuiWindowFlags.NoMove |
-                             ImGuiWindowFlags.NoBackground;
-
         while (!Raylib.WindowShouldClose() && Router.Router.Get().Route == Router.Routes.MainMenu) {
-            float screenWidth = Raylib.GetScreenWidth();
-            float screenHeight = Raylib.GetScreenHeight();
-            float buttonWidth = 200f;
-            float buttonHeight = 50f;
-            float spacing = 20f;
-            float totalHeight = (buttonHeight * 2) + spacing;
-            float startY = (screenHeight - totalHeight) / 2f;
 
             //! Mate did you really just go ahead and did things from damn
             //! scratch again instead of enlisting the help of a 3rd party
@@ -88,61 +77,57 @@ class MainMenu {
             //!
             //! I'm doing that later. I don't have the mental bandwidth
             //! to deal with this bs right now.
-            //! 
-            //! https://youtu.be/hUxoiHfAFBo?t=112
             //! vvvvvvvvvvvvvvvv
-            Rectangle playButton = new Rectangle((screenWidth - buttonWidth) / 2f, startY, buttonWidth, buttonHeight);
-            Rectangle quitButton = new Rectangle((screenWidth - buttonWidth) / 2f, startY + buttonHeight + spacing, buttonWidth, buttonHeight);
-            Vector2 mousePosition = Raylib.GetMousePosition();
-
-
-            bool isMouseOverPlay = Raylib.CheckCollisionPointRec(mousePosition, playButton);
-            bool isMouseOverQuit = Raylib.CheckCollisionPointRec(mousePosition, quitButton);
-
-            // if (router.Route == ) {
-            //     if (isMouseOverPlay && Raylib.IsMouseButtonPressed(MouseButton.Left)) {
-            //         router.Machine.Fire("ClickPlay");
-            //     } else if (isMouseOverQuit && Raylib.IsMouseButtonPressed(MouseButton.Left)) {
-            //         router.Machine.Fire("ClickQuit");
-            //     }
-            // }
 
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.Black);
             rlImGui.Begin();
 
-            //! For someone who uses Gemini, you sure can't even put it to good
-            //! use. I've queried the Gemini large language model to have a
-            //! functioning rlImGui
+            //! You use Gemini right? Here's something the "never will be
+            //! sentient" Large LANGUAGE MODEL that is Gemini returned all by
+            //! just querying
+            //!
+            //! "rlImGui-cs without window"
+            //!
+            //! And quit treating it like a damn person, those tech CEOs and
+            //! Thiel types keep saying that just so you could give them
+            //! attention and money.
 
             // Create a full-screen ImGui window with no chrome
-            ImGui.SetNextWindowPos(Vector2.Zero);
-            ImGui.SetNextWindowSize(new Vector2(Raylib.GetScreenWidth(), Raylib.GetScreenHeight()));
+
             ImGuiWindowFlags flags = ImGuiWindowFlags.NoTitleBar |
                                      ImGuiWindowFlags.NoResize |
                                      ImGuiWindowFlags.NoMove |
                                      ImGuiWindowFlags.NoBackground;
 
-            ImGui.Begin("HiddenRoot", flags);
+            ImGui.SetNextWindowPos(Vector2.Zero);
+            ImGui.SetNextWindowSize(new Vector2(Raylib.GetScreenWidth(), Raylib.GetScreenHeight()));
+ 
+
+            ImGui.Begin("Root", flags);
+
+            //! Isn't this much more precise and shorter?
 
             // Put your ImGui widgets here
-            // if (ImGui.Button("Test")) {
-            //     Console.WriteLine("I'm clicked!"); ;
-            // }
-
+            if (ImGui.Button("Debug")) {
+                Console.WriteLine("I'm clicked!"); ;
+            }
             ImGui.End();
 
-            Color playColor = isMouseOverPlay ? Color.DarkBlue : Color.Blue;
-            Raylib.DrawRectangleRec(playButton, playColor);
-            Raylib.DrawRectangleLinesEx(playButton, 2, Color.White);
-            Raylib.DrawText("PLAY", (int)playButton.X + 75, (int)playButton.Y + 15, 20, Color.White);
 
+            var center = ImGui.GetMainViewport().GetCenter();
+            ImGui.SetNextWindowPos(center, ImGuiCond.Always, new Vector2(0.5f, 0.5f));
+            ImGui.Begin("AlwaysCenteredButtons", flags);
 
-            Color quitColor = isMouseOverQuit ? Color.Maroon : Color.Red;
-            Raylib.DrawRectangleRec(quitButton, quitColor);
-            Raylib.DrawRectangleLinesEx(quitButton, 2, Color.White);
-            Raylib.DrawText("QUIT", (int)quitButton.X + 75, (int)quitButton.Y + 15, 20, Color.White);
+            if (ImGui.Button("PLAY")) {
+                router.Machine.Fire(Router.Trigger.SelectBlobs);
+            }
 
+            if (ImGui.Button("QUIT")) {
+                Environment.Exit(0);
+            }
+
+            ImGui.End();
             rlImGui.End();
             Raylib.EndDrawing();
         }
