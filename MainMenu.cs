@@ -45,7 +45,7 @@ class MainMenu {
 
         //! p.s: don't uncomment this.
         var router = Router.Router.Get();
-        
+
 
         // stateMachine.Configure("Menu")
         //     .Permit("ClickPlay", "Launching")
@@ -102,16 +102,20 @@ class MainMenu {
 
             ImGui.SetNextWindowPos(Vector2.Zero);
             ImGui.SetNextWindowSize(new Vector2(Raylib.GetScreenWidth(), Raylib.GetScreenHeight()));
- 
+
 
             ImGui.Begin("Root", flags);
 
             //! Isn't this much more precise and shorter?
 
             // Put your ImGui widgets here
-            if (ImGui.Button("Debug")) {
+
+            if (ImGui.Button("     ")) {
                 Console.WriteLine("I'm clicked!"); ;
             }
+            Raylib.DrawText("gubeD", 12, 12, 11, Color.White);
+
+
             ImGui.End();
 
 

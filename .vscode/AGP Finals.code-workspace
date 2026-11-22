@@ -1,5 +1,11 @@
 {
 	"folders": [
 		{ "path": ".." }
-	]
+	],
+    "settings": {
+      "[csharp]": {
+        "editor.defaultFormatter": "ms-dotnettools.csharp"
+      },
+      "editor.formatOnSave": true
+    }
 }
